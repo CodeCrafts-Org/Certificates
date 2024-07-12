@@ -1,0 +1,19 @@
+{
+    "name": "codecrafts/certificates",
+    "description": "A WordPress compatible Certification feature",
+    "require": {
+        "phpoffice/phpword": "^1.2",
+        "dompdf/dompdf": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codecrafts\\Certificates\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ciroDourado",
+            "email": "ciro.brz@gmail.com"
+        }
+    ]
+}
