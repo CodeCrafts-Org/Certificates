@@ -53,24 +53,12 @@ class Plugin
 		$this->version = $version;
 		$this->applicationContainer = $applicationContainer;
 
-		$this->setLocale();
 		$this->defineApplicationHooks();
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the CodeCrafts_Frequencias_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 */
-	private function setLocale(): void
-	{
-		$this->pluginLoader->addAction('plugins_loaded', [new PluginTranslation, 'loadPluginTextdomain']);
 	}
 	
 	private function defineApplicationHooks(): void
 	{
-		// $service = $this->applicationContainer->makeCertificatesService();
+		$service = $this->applicationContainer->makeCertificatesService();
 	}
 
 	/**
