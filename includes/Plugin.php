@@ -2,7 +2,7 @@
 
 namespace CodeCrafts\Certificates\Includes;
 
-use CodeCrafts\Certificates\App\DependencyInjectionContainers\ApplicationContainer;
+use CodeCrafts\Certificates\Src\DependencyInjectionContainers\ApplicationContainer;
 
 /**
  * The file that defines the core plugin class
