@@ -59,6 +59,8 @@ class Plugin
 	private function defineApplicationHooks(): void
 	{
 		$service = $this->applicationContainer->makeCertificatesService();
+
+		$this->pluginLoader->addFilter('generate_certificate', [$service, 'generateCertificate'], 1, 2);
 	}
 
 	/**
