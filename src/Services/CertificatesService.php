@@ -18,15 +18,15 @@ class CertificatesService
             }
             $certificate = tempnam(
                 directory: sys_get_temp_dir(), 
-                prefix: "html_"
+                prefix: 'html_certificate_'
             );
             $templateProcessor->saveAs($certificate);
-            
+
             $options = new Options();
             $options->set('isRemoteEnabled', true);
-            
+
             $dompdf = new Dompdf($options);
-            $dompdf->loadHtmlFile($certificate);
+            $dompdf->loadHtml($certificate);
             $dompdf->setPaper('A4', 'portrait');
             $dompdf->render();
             $data = $dompdf->output();
@@ -34,7 +34,6 @@ class CertificatesService
     
             return $data;
         } catch (Throwable $throwable) {
-            echo $throwable->getMessage();
             return null;
         }
     }
