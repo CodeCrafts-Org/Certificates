@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeCrafts\Certificates\Src\Services\CertificatesService;
+namespace CodeCrafts\Certificates\Src\Services;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -34,6 +34,7 @@ class CertificatesService
     
             return $data;
         } catch (Throwable $throwable) {
+            echo $throwable->getMessage();
             return null;
         }
     }

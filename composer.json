@@ -7,8 +7,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Codecrafts\\Certificates\\": "src/",
-	    "CodeCrafts\\Includes": "includes/"
+            "CodeCrafts\\Certificates\\Src\\": "src/",
+            "CodeCrafts\\Certificates\\Includes\\": "includes/"
         }
     },
     "authors": [
