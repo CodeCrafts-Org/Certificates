@@ -14,11 +14,14 @@ class CertificatesService
         try {
             $templateProcessor = new TemplateProcessor($template);
             foreach ($data as $key => $value) {
-                $templateProcessor->setValue(search: $key, replace: $value);
+                $templateProcessor->setValue(
+                    /* search:  */ $key, 
+                    /* replace: */ $value
+                );
             }
             $certificate = tempnam(
-                directory: sys_get_temp_dir(), 
-                prefix: 'html_certificate_'
+                /* directory: */ sys_get_temp_dir(), 
+                /* prefix: */ 'html_certificate_'
             );
             $templateProcessor->saveAs($certificate);
 
