@@ -37,6 +37,11 @@ class CertificatesService
     
             return $data;
         } catch (Throwable $throwable) {
+            error_log(
+                /* message: */ $throwable->getMessage(),
+                /* message_type: */ 0
+            );
+
             return null;
         }
     }
