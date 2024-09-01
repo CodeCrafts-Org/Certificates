@@ -2,8 +2,8 @@
 
 namespace CodeCrafts\Certificates\Src\Services;
 
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Throwable;
 
@@ -13,29 +13,22 @@ class CertificatesService
     {
         try {
             $templateProcessor = new TemplateProcessor($template);
-            foreach ($data as $key => $value) {
-                $templateProcessor->setValue(
-                    /* search:  */ $key, 
-                    /* replace: */ $value
-                );
-            }
-            $certificate = tempnam(
-                /* directory: */ sys_get_temp_dir(), 
-                /* prefix: */ 'html_certificate_'
+            $templateProcessor->setValues($data);
+            $document = tempnam(
+                /* directory: */ sys_get_temp_dir(),
+                /* prefix: */ 'document'
             );
-            $templateProcessor->saveAs($certificate);
+            $templateProcessor->saveAs($document);
 
-            $options = new Options();
-            $options->set('isRemoteEnabled', true);
+	        Settings::setPdfRendererName(Settings::PDF_RENDERER_DOMPDF);
+            Settings::setPdfRendererPath(realpath(__DIR__) . '/../../vendor/dompdf/dompdf');
+            $certificate = tempnam(
+                /*directory: */ sys_get_temp_dir(),
+                /* prefix: */ 'certificate'
+            );
+	        IOFactory::load($document)->save($certificate, 'PDF');
 
-            $dompdf = new Dompdf($options);
-            $dompdf->loadHtml($certificate);
-            $dompdf->setPaper('A4', 'portrait');
-            $dompdf->render();
-            $data = $dompdf->output();
-            unlink($certificate);
-    
-            return $data;
+            return file_get_contents($certificate);
         } catch (Throwable $throwable) {
             error_log(
                 /* message: */ $throwable->getMessage(),
